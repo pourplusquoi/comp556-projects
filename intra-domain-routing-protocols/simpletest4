@@ -1,0 +1,28 @@
+[nodes]
+       
+1 2 3 4 5
+       
+[links]
+       
+(1,2) delay 0.010 prob 0.0
+(2,3) delay 0.030 prob 0.0
+(3,4) delay 0.070 prob 0.0
+(1,4) delay 0.010 prob 0.0
+(1,5) delay 0.030 prob 0.0
+(2,5) delay 0.010 prob 0.0
+(3,5) delay 0.010 prob 0.0
+       
+[events]
+       
+0.01   xmit (3,4)
+150.00 xmit (3,4)
+250.00 changedelay (2,3) 0.010
+400.00 xmit (4,3)
+500.00 changedelay (2,3) 0.030
+600.00 xmit (3,4)
+650.00 xmit (4,5)
+700.00 linkdying (2,5)
+800.00 xmit (5,4)
+850.00 linkcomingup (2,5)
+950.00 xmit (4,5)
+1000.00 end

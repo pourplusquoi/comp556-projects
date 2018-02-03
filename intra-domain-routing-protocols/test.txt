@@ -1,0 +1,32 @@
+## Test
+
+### Component Level Test
+
+Our component level test are focused on certain functions of our protocol, and basic behaviors when network topology changed. To achieve this goal, we created some networks manually along with the 3 tests given by instructor, giving the expected results the protocal should have, then compare the output manually.
+
+For the simpletest(1-2), the networks are working under simple situations (they only have one way to go), by checking the output log, we ensured functions `sendPingToAllPorts`, `replyPong`, `recvPongMessage`, `sendAllLSEntriesToFlood`, `recvLSMessage`, `sendAllDVEntriesToNeighbors`, `recvDVMessage`, and`updateForwardingTable` are working properly.
+
+For the simpletest(3-5), the topology are much more complex, our protocol should make it's own routing stategy and tansmit the data based on the latest information it has. We calculated the predicted transmission routes and observe the real output by our protocol. We ensured our implementations of finding shortest path in DV and LS (Dijkstra's Algorithm) are both correct, also the alarms functions.
+
+### System Level Test
+
+To test our program with more complicated cases, we use a python script to generate the following test cases. We use python-igraph library (http://igraph.org/python/) to generate graphes with Erdos-Renyi model. All the delays of links are randomly generated between 0.01 and 0.10.
+
+- randomGraphTest
+  - number of vertices: 10, number of edges: 20 
+  - The only event in this test case is to send a data packet from node 3 to node 4.
+  - Purpose: We use this test case to make sure that both our DV and LS algorithms can pick the shortest path in a more complicated graph by manually checking if it is really the shortest one.
+- bigGraphTest
+  - number of vertices: 100, number of edges: 300
+  - The only event in this test case is to send a data packet from node 0 to node 1
+  - Purpose: We want to know if our program will crash when there are too many vertices. It turns out our program will not crash even if the number of edges is 300! To execute this test case, you need to wait around 25~40 seconds until the program ends.
+- complicatedTest
+  - number of vertices: 50, number of edges: 150
+  - We generate 10000 events for this test case. We randomly choose the following events to take place every 150 seconds:
+    - `xmit`: the source and destination nodes are chosen randomly from the whole graph. They won't be the same node.
+    - `linkdying`: one edge from the graph is randomly chosen.
+    - `changedelay`: one edge from the graph is randomly chosen.
+    - And, if there are some links dead, also `linkcomingup`: one current dead link is randomly chosen.
+  - Purpose: We use this test case to make sure that:
+    - the program doesn't have any memory leak problem (Because the program takes a really long time to execute such many events, we have enough time to check the memory usage by using `top` command), and that
+    - the results of DL and LS are consistent during delivering DATA packets (They may choose different shortest paths, but the arriving time of the same `xmit` event must be the same).

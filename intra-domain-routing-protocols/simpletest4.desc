@@ -1,0 +1,31 @@
+This test tests whether
+
+1) the routers can perform approperly in a relatively complex network
+2) the routers can deal with link lost and link cost change
+
+(1)-----(4)
+|  \     |
+|   (5)  |
+|  /   \ |
+(2)-----(3)
+
+0.01   xmit (3,4)
+Data will not transmit
+
+150.00 xmit (3,4)
+Data will go this route: 3->5->2->1->4
+
+400.00 xmit (4,3)
+Data will go this route: 4->1->2->3
+
+600.00 xmit (3,4)
+Data will go this route: 3->5->2->1->4
+
+650.00 xmit (4,5)
+Data will go this route: 4->1->2->5
+
+800.00 xmit (5,4)
+Data will go this route: 5->1->4
+
+950.00 xmit (4,5)
+Data will go this route: 4->1->2->5
