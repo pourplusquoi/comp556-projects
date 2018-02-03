@@ -10,7 +10,7 @@ To run client, use command ``./client hostname port size count``.
 To run server on ping-pong mode, use command ``./server port``; and to run server on web server mode, use command ``./server port www root_directory``.
 
 ##The Ping-Pong Client and Server
-In this part, we tested our client on clear server glass and our server on clear server water. We sent messages of length in interval 10 <= size <= 65535, client and server worked fine. The latency of transmission is reasonable.
+In this part, we tested our client on clear server glass, and our server on clear server water. We sent messages of length in interval 10 <= size <= 65535, client and server worked fine. The latency of transmission is reasonable.
 
 Besides, we tested ping-pong server by sending messages to it from multiple client at the same time. The results showed that ping-pong server can handle multiple concurrent connections.
 
