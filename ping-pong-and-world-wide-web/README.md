@@ -4,7 +4,7 @@
 
 Go to the directory where ``Makefile`` locates, use command ``make`` to compile ``server.c`` into ``server`` and ``client.c`` into ``client``.
 
-##How to Test
+## How to Test
 
 ### Client
 
