@@ -1,6 +1,6 @@
-# COMP 556: Introduction to Computer Networks
+# Coursework: Introduction to Computer Networks
 
-Three projects of COMP556 is included in this folder.
+Three projects are included in this folder.
 
 ## Ping-Pong and World Wide Web
 
